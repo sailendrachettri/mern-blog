@@ -18,7 +18,7 @@ export default function Register(){
         if(response.status === 200)
             alert("User created successfully!");
         else
-            alert('Registration failed')
+            alert('Registration failed');
     }
 
     return(
