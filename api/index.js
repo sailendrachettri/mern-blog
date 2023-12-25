@@ -20,6 +20,7 @@ const app = express();
 app.use(cors({credentials:true, origin: 'http://localhost:3000'}));
 app.use(express.json());
 app.use(cookieParser());
+app.use('/uploads', express.static(__dirname + '/uploads'));
 
 mongoose.connect('mongodb+srv://sailendrachettri:tFUZW2Q7kDSzmQHF@cluster0.73bkaub.mongodb.net/tech-blog');
 
@@ -86,17 +87,33 @@ app.post('/post', uploadMiddleware.single('file'), async(req, res) =>{
     const newPath = path + '.' + ext;
     fs.renameSync(path, newPath);
 
-    // fetching from frontend
-    const {title, summary, content} = req.body;
+    // grab the author information
+    const {token} = req.cookies;
+    jwt.verify(token, secretKey, {}, async(err, info)=>{
+        if(err) throw err;
 
-    const postDoc = await Post.create({
-        title,
-        summary,
-        content,
-        cover:newPath
+        // fetching from frontend
+        const {title, summary, content} = req.body;
+        const postDoc = await Post.create({
+            title,
+            summary,
+            content,
+            cover:newPath,
+            author:info.id
+        });
+
+        res.json(postDoc)
     });
-
-    res.json(postDoc)
 })
+
+// FETCH THE POSTS
+app.get('/post', async(req, res) => {
+    res.json(
+        await Post.find()
+            .populate('author', ['username'])
+            .sort({createdAt: -1})
+            .limit(50)
+    );
+});
 
 app.listen(4000);

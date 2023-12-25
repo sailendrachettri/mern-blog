@@ -1,17 +1,19 @@
-export default function Post(){
+import {format} from 'date-fns';
+
+export default function Post({title, summary, content, cover, createdAt, author}){
     return (
         <div className="post">
           <div className="image">
-          <img src="https://blog.hubspot.com/hs-fs/hubfs/how-an-agency-stole-traffic-with-ai.png?width=595&height=400&name=how-an-agency-stole-traffic-with-ai.png" alt="Post view"></img>
+          <img src={'http://localhost:4000/'+cover} alt="Post view"></img>
           </div>
           
           <div className="texts">
-            <h2>An Agency Used AI to Pull an "SEO Heist": Was It Worth It? We Asked Experts</h2>
+            <h2>{title}</h2>
             <p className="info">
-              <a className="author">Sailendr Chettri</a>
-              <time>23-12-2023 10:15 pm</time>
+              <a className="author">{author.username}</a>
+              <time>{format(new Date(createdAt), 'MMM d, yyy HH:mm')}</time>
             </p>
-            <p className="summary">There’s no Clooney-esque charming rogue. Instead, you’ll find a story about how AI was used to create what critics called “a roadmap on how to destroy the internet.”</p>
+            <p className="summary">{summary}</p>
           </div>
         </div>
     );
