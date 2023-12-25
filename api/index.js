@@ -48,7 +48,10 @@ app.post('/login', async(req, res) =>{
         // user loggedIn now
         jwt.sign({username, id:userDoc._id}, secretKey, {}, (err, token) =>{
             if(err) throw err;
-            res.cookie('token', token).json('ok');
+            res.cookie('token', token).json({
+                id:userDoc._id,
+                username
+            });
         });
     } else{
         // Password incorrect so not logged in
