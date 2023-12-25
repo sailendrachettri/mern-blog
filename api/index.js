@@ -4,6 +4,7 @@ const User = require('./models/User');
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 // Salt for password hashing
 const salt = bcryptjs.genSaltSync(10);
@@ -14,6 +15,7 @@ const app = express();
 
 app.use(cors({credentials:true, origin: 'http://localhost:3000'}));
 app.use(express.json());
+app.use(cookieParser());
 
 mongoose.connect('mongodb+srv://sailendrachettri:tFUZW2Q7kDSzmQHF@cluster0.73bkaub.mongodb.net/');
 
@@ -46,14 +48,21 @@ app.post('/login', async(req, res) =>{
         // user loggedIn now
         jwt.sign({username, id:userDoc._id}, secretKey, {}, (err, token) =>{
             if(err) throw err;
-            res.json(token);
-            console.log(token);
             res.cookie('token', token).json('ok');
         });
     } else{
         // Password incorrect so not logged in
         res.status(400).json('Worng Credentials');
     }
-})
+});
+
+// USER PROFILE INFORMATION
+app.get('/profile', (req, res) =>{
+    const {token} = req.cookies;
+    jwt.verify(token, secretKey, {}, (err, info)=>{
+        if(err) throw err;
+        res.json(info);
+    });
+});
 
 app.listen(4000);
