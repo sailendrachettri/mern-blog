@@ -116,4 +116,11 @@ app.get('/post', async(req, res) => {
     );
 });
 
+// DISPLAY THE INDIVIDUAL POST USING ID
+app.get('/post/:id', async(req, res) =>{
+    const {id} = req.params;
+    const postDoc = await Post.findById(id).populate('author', 'username');
+    res.json(postDoc);
+});
+
 app.listen(4000);
