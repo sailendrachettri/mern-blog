@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+a{
+    cursor: pointer;
+}
+
 body{
     color: #222;
 }
@@ -106,6 +110,7 @@ input{
 }
 
 button{
+    cursor: pointer;
     width: 100%;
     display: block;
     background-color: #555;
@@ -115,7 +120,7 @@ button{
     padding: 7px 0;
 }
 
-/* POST DEFINATION PAGE STYLING */
+/* ---------------------POST DEFINATION PAGE STYLING--------------------- */
 div.post-page h1{
     text-align: center;
 }
@@ -134,6 +139,26 @@ div.post-page div.author{
     font-size: 0.7rem;
     font-weight: bold;
     color: #aaa;
+}
+
+div.edit-row{
+    text-align: center;
+    margin-bottom: 1.1rem;
+}
+
+div.post-page a.edit-btn{
+    background-color: #333;
+    display: inline-flex;
+    align-items: center;
+    color: #fff;
+    padding: 0.7rem 1.7rem;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+a svg{
+    height: 20px;
+    padding-right: 5px;
 }
 
 div.post-page div.image{
