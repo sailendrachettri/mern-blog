@@ -71,7 +71,7 @@ div.post p.summary{
 }
 
 /* --------------------LOGIN AND REGISTER STYLE-------------------- */
-form h1{
+form.login h1, form.register h1{
     text-align: center;
 }
 

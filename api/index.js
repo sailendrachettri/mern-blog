@@ -1,10 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const User = require('./models/User');
+const Post = require('./models/Post');
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const multer = require('multer');
+const uploadMiddleware = multer({ dest: 'uploads/' });
+const fs = require('fs');
 
 // Salt for password hashing
 const salt = bcryptjs.genSaltSync(10);
@@ -17,7 +21,7 @@ app.use(cors({credentials:true, origin: 'http://localhost:3000'}));
 app.use(express.json());
 app.use(cookieParser());
 
-mongoose.connect('mongodb+srv://sailendrachettri:tFUZW2Q7kDSzmQHF@cluster0.73bkaub.mongodb.net/');
+mongoose.connect('mongodb+srv://sailendrachettri:tFUZW2Q7kDSzmQHF@cluster0.73bkaub.mongodb.net/tech-blog');
 
 // REGINSTRATION API
 app.post('/register', async(req, res)=>{
@@ -72,5 +76,27 @@ app.get('/profile', (req, res) =>{
 app.post('/logout', (req, res)=>{
     res.cookie('token', '').json('ok');
 });
+
+// CREATE NEW POST
+app.post('/post', uploadMiddleware.single('file'), async(req, res) =>{
+    const {originalname, path} = req.file;
+    const parts = originalname.split('.');
+    // ext - extension eg: .jpeg, .png, .jpg
+    const ext = parts[parts.length - 1]; 
+    const newPath = path + '.' + ext;
+    fs.renameSync(path, newPath);
+
+    // fetching from frontend
+    const {title, summary, content} = req.body;
+
+    const postDoc = await Post.create({
+        title,
+        summary,
+        content,
+        cover:newPath
+    });
+
+    res.json(postDoc)
+})
 
 app.listen(4000);
