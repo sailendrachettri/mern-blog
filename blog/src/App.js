@@ -9,8 +9,14 @@ import Register from './pages/Register';
 import CreatePost from './pages/CreatePost';
 import PostPage from './pages/PostPage';
 import EditPost from './pages/EditPost';
+import { useEffect } from 'react';
 
 function App() {
+  useEffect(() => {
+    document.title = 'Sailendra Chettri';
+    
+  }, []);
+
   return (
     <UserContextProvider>
     <Routes>

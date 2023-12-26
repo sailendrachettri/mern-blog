@@ -10,9 +10,15 @@ const multer = require('multer');
 const uploadMiddleware = multer({ dest: 'uploads/' });
 const fs = require('fs');
 
+require('dotenv').config();
+
+
 // Salt for password hashing
 const salt = bcryptjs.genSaltSync(10);
-const secretKey = "ThisIsASecretKey$3908";
+
+// .env variables
+const secretKey = process.env.REACT_APP_SECRET_KEY;
+const mongoDbUrl = process.env.REACT_APP_MONGODB_URL;
 
 
 const app = express();
@@ -22,7 +28,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
-mongoose.connect('mongodb+srv://sailendrachettri:tFUZW2Q7kDSzmQHF@cluster0.73bkaub.mongodb.net/tech-blog');
+mongoose.connect(mongoDbUrl);
 
 // REGINSTRATION API
 app.post('/register', async(req, res)=>{
