@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Rubik+Doodle+Shadow&display=swap');
+
+:root{
+    --logo-font: 'Rubik Doodle Shadow', 'Roboto';
+    --para-font: 'Gowun Dodum', 'Roboto';
+    --heading2-font: 'Gowun Dodum', 'Roboto';
+    --heading1-font: 'Gowun Dodum', 'Roboto';
+}
+
 *{
     box-sizing: border-box;
 }
@@ -37,6 +46,7 @@ header a{
 header a.logo{
     font-weight: bold;
     font-size: 1.5rem;
+    font-family: var(--logo-font);
 }
 
 header nav{
@@ -62,29 +72,35 @@ div.post{
 div.post div.texts h2{
     margin: 0;
     font-size: 1.2rem;
+    font-family: var(--heading2-font);
+    font-weight: bold;
 }
 
 div.post div.texts a{
     text-decoration: none;
     color: inherit;
+    font-family:var(--heading2-font);
 }
 
 div.post p.info{
     margin: 5px 0;
     color: #888;
     font-size: 0.8rem;
-    font-weight: bold;
     display: flex;
     gap: 10px;
+    font-family: var(--para-font);
 }
 
 div.post p.info a.author{
-    color: #333;
+    color: #888;
+    font-size: 0.8rem;
+    text-transform: capitalize;
 }
 
 div.post p.summary{
     margin: 10px 0;
     line-height: 1.2rem;
+    font-family: var(--para-font);
 }
 
 /* --------------------LOGIN AND REGISTER STYLE-------------------- */
@@ -123,22 +139,23 @@ button{
 /* ---------------------POST DEFINATION PAGE STYLING--------------------- */
 div.post-page h1{
     text-align: center;
+    font-family: var(--heading1-font);
 }
 
 div.post-page time{
     text-align: center;
     display: block;
-    font-size: 0.7rem;
-    color: #aaa;
+    font-size: 0.8rem;
+    color: #595757;
+    font-family: var(--para-font);
 }
 
 div.post-page div.author{
     text-align: center;
     margin-bottom: 1.1rem;
-    font-size: 0.7rem;
-    font-size: 0.7rem;
-    font-weight: bold;
-    color: #aaa;
+    font-size: 0.8rem;
+    color: #595957;
+    font-family: var(--para-font);
 }
 
 div.edit-row{
@@ -182,4 +199,6 @@ div.post-page a{
 
 div.post-page div.content p{
     line-height: 1.6rem;
+    font-family: var(--para-font);
+    font-size: 21px;
 }
