@@ -34,7 +34,7 @@ export default function PostPage(){
         <div className="post-page">
             
             <h1>{postInfo.title}</h1>
-            <time>{format(new Date(postInfo.createdAt), 'MMM d, yyy HH:mm')}</time>
+            <time>{format(new Date(postInfo.createdAt), 'MMM d, yyy HH:mm a')}</time>
             <div className="author">by @{postInfo.author.username}</div>
             {userInfo.id === postInfo.author._id && (
                 <div className="edit-row">
