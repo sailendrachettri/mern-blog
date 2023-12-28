@@ -76,6 +76,10 @@ div.post div.texts h2{
     font-weight: bold;
 }
 
+div.post div.texts h2::first-letter{
+    text-transform: capitalize;
+}
+
 div.post div.texts a{
     text-decoration: none;
     color: inherit;
@@ -101,6 +105,10 @@ div.post p.summary{
     margin: 10px 0;
     line-height: 1.2rem;
     font-family: var(--para-font);
+}
+
+div.post p.summary::first-letter{
+    text-transform: capitalize;
 }
 
 /* --------------------LOGIN AND REGISTER STYLE-------------------- */
@@ -201,4 +209,28 @@ div.post-page div.content p{
     line-height: 1.6rem;
     font-family: var(--para-font);
     font-size: 21px;
+}
+
+div.post-page div.content p::first-letter{
+    text-transform: capitalize;
+}
+
+
+/* ----------------------------FOOTER STYLE---------------------------- */
+footer{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    margin: 1rem 0;
+}
+
+footer div{
+    padding: 5px 0;
+    font-family: var(--para-font);
+}
+
+footer div .linkTag{
+    text-decoration: none;
+    color: #31aff5;
+    font-weight: bold;
 }

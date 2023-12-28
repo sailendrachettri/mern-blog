@@ -5,9 +5,18 @@ import {UserContext} from "../UserContext";
 
 export default function PostPage(){
     // STATE VARIABLES
+    // const [title, setTitle] = useState('Sailendra Chettri');
     const [postInfo, setPostInfo] = useState(null);
     const {userInfo} = useContext(UserContext);
     const {id} = useParams();
+
+    // REACT HOOKS 
+    // TODO: set dynamic title for every pages
+    // useEffect(() => {
+    //     document.title = title;
+    //     setTitle(postInfo.title);
+        
+    // }, []);
 
     useEffect(() => {
         fetch(`http://localhost:4000/post/${id}`)
@@ -18,10 +27,12 @@ export default function PostPage(){
         });
     }, []);
 
+    // JAVASCRITP LOGIC
     if(!postInfo) return '';
 
     return(
         <div className="post-page">
+            
             <h1>{postInfo.title}</h1>
             <time>{format(new Date(postInfo.createdAt), 'MMM d, yyy HH:mm')}</time>
             <div className="author">by @{postInfo.author.username}</div>
