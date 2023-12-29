@@ -4,7 +4,8 @@ import 'react-quill/dist/quill.snow.css';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css'; // Choose a style that suits your preference
 
-hljs.configure({ languages: ['javascript', 'cpp', 'c'] });
+// hljs.configure({ languages: ['javascript', 'cpp', 'c'] });
+hljs.configure({ languages: hljs.listLanguages() });
 
 const modules = {
   syntax: {
